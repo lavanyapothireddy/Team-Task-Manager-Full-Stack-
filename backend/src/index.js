@@ -22,6 +22,7 @@ async function start() {
   await initializeDatabase();
 
   app.use('/api/auth',     require('./routes/auth'));
+  app.use('/api/dashboard', require('./routes/dashboard'));
   app.use('/api/projects', require('./routes/projects'));
   app.use('/api/projects', require('./routes/tasks'));
   app.use('/api/users',    require('./routes/users'));
