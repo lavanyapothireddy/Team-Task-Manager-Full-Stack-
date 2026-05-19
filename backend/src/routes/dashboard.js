@@ -31,23 +31,26 @@ router.get('/', authenticate, (req, res) => {
     `).all(userId);
 
     // Stats
-    const totalProjects = projects.length;
+    const total = db.prepare(
+  `SELECT COUNT(*) as c FROM tasks 
+   WHERE assignee_id = ? AND status != 'done'`
+).get(userId).c;
 
-    const assignedTasks = db.prepare(
-      `SELECT COUNT(*) as c FROM tasks WHERE assignee_id = ?`
-    ).get(userId).c;
+const in_progress = db.prepare(
+  `SELECT COUNT(*) as c FROM tasks 
+   WHERE assignee_id = ? AND status = 'in_progress'`
+).get(userId).c;
 
-    const completedTasks = db.prepare(
-      `SELECT COUNT(*) as c FROM tasks WHERE assignee_id = ? AND status = 'done'`
-    ).get(userId).c;
+const done = db.prepare(
+  `SELECT COUNT(*) as c FROM tasks 
+   WHERE assignee_id = ? AND status = 'done'`
+).get(userId).c;
 
-    const overdueTasks = db.prepare(
-      `SELECT COUNT(*) as c FROM tasks WHERE assignee_id = ? AND status != 'done' AND due_date < date('now')`
-    ).get(userId).c;
-
-    const inProgressTasks = db.prepare(
-      `SELECT COUNT(*) as c FROM tasks WHERE assignee_id = ? AND status = 'in_progress'`
-    ).get(userId).c;
+const overdue = db.prepare(
+  `SELECT COUNT(*) as c FROM tasks 
+   WHERE assignee_id = ? AND status != 'done' 
+   AND due_date < date('now')`
+).get(userId).c;
 
     res.json({
       stats: { totalProjects, assignedTasks, completedTasks, overdueTasks, inProgressTasks },
