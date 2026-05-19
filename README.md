@@ -1,7 +1,6 @@
 # TaskFlow — Team Task Manager
 
 A full-stack web application for creating projects, assigning tasks, and tracking team progress with **role-based access control** and an **AI assistant powered by Groq**.
-
 ---
 
 ## 🚀 Live Demo
