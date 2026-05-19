@@ -6,12 +6,7 @@ A full-stack web application for creating projects, assigning tasks, and trackin
 
 ## 🚀 Live Demo
 
-> **[https://taskflow-xxxx.onrender.com](https://taskflow-xxxx.onrender.com)**
-> *(Replace with your Render URL after deploying)*
-
-## 📹 Demo Video
-
-> *(Add your 2–5 min Loom/YouTube link here)*
+> **https://team-task-manager-full-stack-3h1q.onrender.com**
 
 ---
 
@@ -251,9 +246,3 @@ After deploying, create accounts via the Signup page:
 
 ---
 
-## 📦 Submission Checklist
-
-- [ ] Live Render URL added to README
-- [ ] GitHub repo link
-- [ ] README complete
-- [ ] 2–5 min demo video (Loom recommended)
