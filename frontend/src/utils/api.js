@@ -11,10 +11,8 @@ async function request(path, options = {}) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
-
   const res = await fetch(`${BASE_URL}${path}`, { ...options, headers });
   const data = await res.json();
-
   if (!res.ok) {
     throw new Error(data.error || 'Request failed');
   }
@@ -27,7 +25,10 @@ export const api = {
   login: (body) => request('/auth/login', { method: 'POST', body: JSON.stringify(body) }),
   getMe: () => request('/auth/me'),
   updateProfile: (body) => request('/auth/me', { method: 'PUT', body: JSON.stringify(body) }),
-  getDashboard: () => axios.get('/api/dashboard').then(r => r.data)
+
+  // Dashboard — fixed: was duplicated and using wrong path
+  getDashboard: () => request('/dashboard'),
+
   // Projects
   listProjects: () => request('/projects'),
   createProject: (body) => request('/projects', { method: 'POST', body: JSON.stringify(body) }),
@@ -48,9 +49,6 @@ export const api = {
   updateTask: (projectId, taskId, body) => request(`/projects/${projectId}/tasks/${taskId}`, { method: 'PUT', body: JSON.stringify(body) }),
   deleteTask: (projectId, taskId) => request(`/projects/${projectId}/tasks/${taskId}`, { method: 'DELETE' }),
   addComment: (projectId, taskId, body) => request(`/projects/${projectId}/tasks/${taskId}/comments`, { method: 'POST', body: JSON.stringify(body) }),
-
-  // Dashboard
-  getDashboard: () => request('/projects/dashboard'),
 
   // Admin
   listUsers: () => request('/users'),
