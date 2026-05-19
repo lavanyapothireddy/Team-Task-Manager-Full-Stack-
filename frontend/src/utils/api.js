@@ -27,7 +27,7 @@ export const api = {
   login: (body) => request('/auth/login', { method: 'POST', body: JSON.stringify(body) }),
   getMe: () => request('/auth/me'),
   updateProfile: (body) => request('/auth/me', { method: 'PUT', body: JSON.stringify(body) }),
-
+  getDashboard: () => axios.get('/api/dashboard').then(r => r.data)
   // Projects
   listProjects: () => request('/projects'),
   createProject: (body) => request('/projects', { method: 'POST', body: JSON.stringify(body) }),
